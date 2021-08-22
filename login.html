@@ -39,11 +39,21 @@
 
 <body class="text-center">
   <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
+<!--   <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
       <h4 class="alert-heading">¡A trabajar! :)</h4>
       <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 08/08/2021).</p>
       <hr>
       <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+    </div>--> 
+    <img src="img/login.png" >
+    <div class="signin">
+      <h3 class="mb-3">Please Sing In</h3>
+      <input type="text" id="user" class="form-control" name="user" placeholder="User" required>
+      <input type="password" id="pass" class="form-control" name="password" placeholder="Password" required>
+      <div class="checkbox mb-3">
+          <input type="checkbox" name="remember_me"> Remember me
+      </div>
+      <input type="button" value="Sing In" id="btnSingIn" class="btn-lg btn-success btn-block" />
     </div>
   </div>
 
