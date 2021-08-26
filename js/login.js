@@ -15,14 +15,6 @@ const buttonSingIn = () => {
       }  
 };
 
-// Autentificación con google
-/*const onSignIn = (googleUser) => {
-    var profile = googleUser.getBasicProfile();
-    localStorage.setItem("datos", profile.getEmail());
-    window.location="index.html";
-};
-//
-*/
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
