@@ -20,5 +20,5 @@ const buttonSingIn = () => {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById("btnSingIn").addEventListener("click", buttonSingIn);
-    document.getElementsByClassName("g-signin2").addEventListener("click", buttonSingIn);
+    document.getElementById("btnSingIn2").addEventListener("click", buttonSingIn);
 });
