@@ -15,16 +15,17 @@ const buttonSingIn = () => {
       }  
 };
 
-const buttonSingIn2 = () => {
-    var id_token = googleUser.getAuthResponse().id_token;
-    localStorage.setItem("datos", id_token);
+// Autentificación con google
+const onSignIn = (googleUser) => {
+    var profile = googleUser.getBasicProfile();
+    localStorage.setItem("datos", profile.getEmail());
     window.location="index.html";
 };
+//
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById("btnSingIn").addEventListener("click", buttonSingIn);
-    document.getElementById("btnSingIn2").addEventListener("click", buttonSingIn2);
 });
