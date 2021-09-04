@@ -64,7 +64,7 @@
 <!-- Autentificación con google -->
   <div class="g-signin2" data-onsuccess="onSignIn"></div>
   <script>
-    async function onSignIn(googleUser) {
+    function onSignIn(googleUser) {
       // Useful data for your client-side scripts:
       var profile = googleUser.getBasicProfile();
       //console.log("ID: " + profile.getId()); // Don't send this directly to your server!
@@ -83,5 +83,6 @@
   </script>
 <!---->
   <script src="js/login.js"></script>
+  <script src="js/init.js"></script>
 </body>
 </html>
