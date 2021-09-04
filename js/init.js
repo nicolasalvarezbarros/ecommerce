@@ -41,12 +41,14 @@ var getJSONData = function(url){
 }
 
 // cerrar sesión de google.
-gapi.load('client', init);
+
 function init() {
   gapi.load('auth2', function() {
     /* Ready. Make a call to gapi.auth2.init or some other API */
   });
 }
+
+init();
 
 function signOut() {
   GoogleAuth.signOut ()
