@@ -43,11 +43,7 @@ var getJSONData = function(url){
 // cerrar sesión de google.
 function signOut() {
   localStorage.removeItem("datos2");
-  var auth2 = gapi.auth2.getAuthInstance();
-  auth2.signOut().then(function () {
-    auth2.disconnect();
-    console.log('User signed out.');
-  });
+  location.href = 'https://accounts.google.com/Logout?&continue=https://nicolasalvarezbarros.github.io/ecommerce/login.html';
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
