@@ -40,6 +40,13 @@ var getJSONData = function(url){
     });
 }
 
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+}
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -48,10 +55,7 @@ document.addEventListener("DOMContentLoaded", function(e){
   if ((JSON.parse(localStorage.getItem("datos")) !== null) || (localStorage.getItem("datos2")) !== null) {
     if (JSON.parse(localStorage.getItem("datos")) !== null) {
       var usuario = JSON.parse(localStorage.getItem("datos"))[0].user;
-    } else {
-      var usuario = localStorage.getItem("datos2")[0];
-    };
-    document.getElementById("userName").innerHTML = 
+      document.getElementById("userName").innerHTML = 
       `<div class="btn-group show">
       <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       ${usuario}
@@ -59,19 +63,29 @@ document.addEventListener("DOMContentLoaded", function(e){
       <div class="dropdown-menu">
         <a href="my-profile.html" class="dropdown-item">Su perfil</a>
         <div class="dropdown-divider"></div>
-        <a id="logout" class="dropdown-item">Cierre de sesión</a>
+        <a id="logout" class="dropdown-item" href="login.html">Cierre de sesión</a>
       </div>
     </div>`;
+    } else {
+      var usuario = localStorage.getItem("datos2")[0];
+      document.getElementById("userName").innerHTML = 
+      `<div class="btn-group show">
+      <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      ${usuario}
+      </a>
+      <div class="dropdown-menu">
+        <a href="my-profile.html" class="dropdown-item">Su perfil</a>
+        <div class="dropdown-divider"></div>
+        <a id="logout" class="dropdown-item" href="login.html" onclick="signOut();">Cierre de sesión</a>
+      </div>
+    </div>`;
+    };
   }
 
   // Cerrar sesión.
   document.getElementById("logout").addEventListener("click", function(){
     if (JSON.parse(localStorage.getItem("datos")) !== null) {
       localStorage.removeItem("datos");
-      window.location="login.html";
-    } else {
-      localStorage.removeItem("datos2");
-      window.location="login.html";
-    };
+    }
   });
 });
