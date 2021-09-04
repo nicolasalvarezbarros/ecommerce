@@ -42,11 +42,11 @@ var getJSONData = function(url){
 
 // cerrar sesión de google.
 function signOut() {
-  localStorage.removeItem("datos2");
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     console.log('User signed out.');
   });
+  localStorage.removeItem("datos2");
   window.location="index.html";
   //gapi.auth2.getAuthInstance().disconnect();
 }

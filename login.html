@@ -82,7 +82,9 @@
     }
 
     function redirigir() {
-      window.location="index.html";
+      if (localStorage.getItem("datos2") !== null) {
+        window.location="index.html";;
+      }; 
     }
   </script>
 <!---->
