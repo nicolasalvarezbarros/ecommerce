@@ -67,6 +67,12 @@ document.addEventListener("DOMContentLoaded", function(e){
         <a id="logout" class="dropdown-item" href="login.html">Cierre de sesión</a>
       </div>
     </div>`;
+
+     // Cerrar sesión.
+    document.getElementById("logout").addEventListener("click", function(){
+      localStorage.removeItem("datos");  
+    });
+
     } else {
       var usuario = localStorage.getItem("datos2")[0];
       document.getElementById("userName").innerHTML = 
@@ -82,10 +88,4 @@ document.addEventListener("DOMContentLoaded", function(e){
     </div>`;
     };
   }
-
-  // Cerrar sesión.
-  document.getElementById("logout").addEventListener("click", function(){
-      localStorage.removeItem("datos");
-      
-  });
 });
