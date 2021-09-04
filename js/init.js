@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function(e){
       <div class="dropdown-menu">
         <a href="my-profile.html" class="dropdown-item">Su perfil</a>
         <div class="dropdown-divider"></div>
-        <a id="logout" class="dropdown-item" >Cierre de sesión</a>
+        <a id="logout" class="dropdown-item" href="login.html">Cierre de sesión</a>
       </div>
     </div>`;
   }
@@ -68,10 +68,8 @@ document.addEventListener("DOMContentLoaded", function(e){
   document.getElementById("logout").addEventListener("click", function(){
     if (JSON.parse(localStorage.getItem("datos")) !== null) {
       localStorage.removeItem("datos");
-      window.location="login.html";
     } else {
       localStorage.removeItem("datos2");
-      window.location="login.html";
     };
   });
 });

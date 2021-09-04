@@ -64,7 +64,7 @@
 <!-- Autentificación con google -->
   <div class="g-signin2" data-onsuccess="onSignIn"></div>
   <script>
-    function onSignIn(googleUser) {
+    async function onSignIn(googleUser) {
       // Useful data for your client-side scripts:
       var profile = googleUser.getBasicProfile();
       //console.log("ID: " + profile.getId()); // Don't send this directly to your server!
@@ -79,9 +79,6 @@
       //console.log("ID Token: " + id_token);
       localStorage.setItem("datos2", profile.getEmail());
       window.location="index.html";
-      if (localStorage.getItem("datos2") === null) {
-        window.location="login.html";
-      };
     }
   </script>
 <!---->
