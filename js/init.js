@@ -43,11 +43,11 @@ var getJSONData = function(url){
 // cerrar sesión de google.
 function signOut() {
   localStorage.removeItem("datos2");
-//  var auth2 = gapi.auth2.getAuthInstance();
-//  auth2.signOut().then(function () {
-//    console.log('User signed out.');
-//  });
-  gapi.auth2.getAuthInstance().disconnect();
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+//  gapi.auth2.getAuthInstance().disconnect();
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
