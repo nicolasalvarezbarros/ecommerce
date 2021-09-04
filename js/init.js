@@ -40,6 +40,7 @@ var getJSONData = function(url){
     });
 }
 
+// cerrar sesión de google.
 function signOut() {
   localStorage.removeItem("datos2");
   var auth2 = gapi.auth2.getAuthInstance();
@@ -53,39 +54,38 @@ function signOut() {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
   // Nombre de usuario
-  if ((JSON.parse(localStorage.getItem("datos")) !== null) || (localStorage.getItem("datos2")) !== null) {
-    if (JSON.parse(localStorage.getItem("datos")) !== null) {
-      var usuario = JSON.parse(localStorage.getItem("datos"))[0].user;
-      document.getElementById("userName").innerHTML = 
-      `<div class="btn-group show">
-      <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      ${usuario}
-      </a>
-      <div class="dropdown-menu">
-        <a href="my-profile.html" class="dropdown-item">Su perfil</a>
-        <div class="dropdown-divider"></div>
-        <a id="logout" class="dropdown-item" href="login.html">Cierre de sesión</a>
-      </div>
-    </div>`;
+  if (JSON.parse(localStorage.getItem("datos")) !== null) {
+    var usuario = JSON.parse(localStorage.getItem("datos"))[0].user;
+    document.getElementById("userName").innerHTML = 
+    `<div class="btn-group show">
+    <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    ${usuario}
+    </a>
+    <div class="dropdown-menu">
+      <a href="my-profile.html" class="dropdown-item">Su perfil</a>
+      <div class="dropdown-divider"></div>
+      <a id="logout" class="dropdown-item" href="login.html">Cierre de sesión</a>
+    </div>
+  </div>`;
 
-     // Cerrar sesión.
-    document.getElementById("logout").addEventListener("click", function(){
-      localStorage.removeItem("datos");  
-    });
+   // Cerrar sesión.
+  document.getElementById("logout").addEventListener("click", function(){
+    localStorage.removeItem("datos");  
+  });
 
-    } else {
-      var usuario = localStorage.getItem("datos2")[0];
-      document.getElementById("userName").innerHTML = 
-      `<div class="btn-group show">
-      <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      ${usuario}
-      </a>
-      <div class="dropdown-menu">
-        <a href="my-profile.html" class="dropdown-item">Su perfil</a>
-        <div class="dropdown-divider"></div>
-        <a id="logout" class="dropdown-item" href="login.html" onclick="signOut();">Cierre de sesión</a>
-      </div>
-    </div>`;
-    };
-  }
+  } else {
+    var usuario = localStorage.getItem("datos2")[0];
+    document.getElementById("userName").innerHTML = 
+    `<div class="btn-group show">
+    <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    ${usuario}
+    </a>
+    <div class="dropdown-menu">
+      <a href="my-profile.html" class="dropdown-item">Su perfil</a>
+      <div class="dropdown-divider"></div>
+      <a id="logout" class="dropdown-item" href="login.html" onclick="signOut();">Cierre de sesión</a>
+    </div>
+  </div>`;
+  };
+  
 });
