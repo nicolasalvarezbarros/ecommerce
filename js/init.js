@@ -47,7 +47,7 @@ function signOut() {
   auth2.signOut().then(function () {
     console.log('User signed out.');
   });
-//  gapi.auth2.getAuthInstance().disconnect();
+  gapi.auth2.getAuthInstance().disconnect();
 }
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
