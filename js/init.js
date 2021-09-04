@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function(e){
   });
 
   } else {
-    var usuario = localStorage.getItem("datos2")[0];
+    var usuario = localStorage.getItem("datos2");
     document.getElementById("userName").innerHTML = 
     `<div class="btn-group show">
     <a class="btn btn-secondary dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
