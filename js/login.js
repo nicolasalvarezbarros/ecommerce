@@ -20,4 +20,8 @@ const buttonSingIn = () => {
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById("btnSingIn").addEventListener("click", buttonSingIn);
+
+    if (localStorage.getItem("datos2") !== null) {
+        window.location="index.html";
+    };
 });
