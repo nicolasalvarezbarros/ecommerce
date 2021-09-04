@@ -84,8 +84,7 @@ document.addEventListener("DOMContentLoaded", function(e){
 
   // Cerrar sesión.
   document.getElementById("logout").addEventListener("click", function(){
-    if (JSON.parse(localStorage.getItem("datos")) !== null) {
       localStorage.removeItem("datos");
-    }
+      localStorage.removeItem("datos2");
   });
 });
