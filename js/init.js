@@ -41,12 +41,20 @@ var getJSONData = function(url){
 }
 
 // cerrar sesión de google.
+function init() {
+  gapi.load('auth2', function() {
+    /* Ready. Make a call to gapi.auth2.init or some other API */
+  });
+}
+
+init();
+
 function signOut() {
+  GoogleAuth.signOut ()
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     console.log('User signed out.');
     localStorage.removeItem("datos2");
-    window.location="login.html";
   });
   //gapi.auth2.getAuthInstance().disconnect();
 }
@@ -85,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     <div class="dropdown-menu">
       <a href="my-profile.html" class="dropdown-item">Su perfil</a>
       <div class="dropdown-divider"></div>
-      <a id="logout" class="dropdown-item" onclick="signOut();">Cierre de sesión</a>
+      <a id="logout" class="dropdown-item" href="login.html" onclick="signOut();">Cierre de sesión</a>
     </div>
   </div>`;
   };
