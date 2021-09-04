@@ -46,8 +46,8 @@ function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();
   auth2.signOut().then(function () {
     console.log('User signed out.');
-    location.reload();
   });
+  window.location="index.html";
   //gapi.auth2.getAuthInstance().disconnect();
 }
 
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     <div class="dropdown-menu">
       <a href="my-profile.html" class="dropdown-item">Su perfil</a>
       <div class="dropdown-divider"></div>
-      <a id="logout" class="dropdown-item" href="login.html" onclick="signOut();">Cierre de sesión</a>
+      <a id="logout" class="dropdown-item" onclick="signOut();">Cierre de sesión</a>
     </div>
   </div>`;
   };
