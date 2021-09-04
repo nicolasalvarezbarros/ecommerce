@@ -62,7 +62,7 @@
     </div>
   </div>
 <!-- Autentificación con google -->
-  <div class="g-signin2" onclick="onSignIn(googleUser);"></div>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
   <script>
     function onSignIn(googleUser) {
       // Useful data for your client-side scripts:
@@ -77,8 +77,8 @@
       // The ID token you need to pass to your backend:
       //var id_token = googleUser.getAuthResponse().id_token;
       //console.log("ID Token: " + id_token);
-      localStorage.setItem("datos2", profile.getEmail());
-      window.location="index.html";
+      localStorage.setItem("datoss", profile.getEmail());
+      //window.location="index.html";
     }
   </script>
 <!---->
