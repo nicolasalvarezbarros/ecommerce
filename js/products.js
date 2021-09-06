@@ -76,6 +76,17 @@ function sortProduct(criteria, array){
   return result;
 }
 
+// Buscador.
+function search(productos, busqueda){
+  let result = [];
+  for(let prod of productos){
+    if ((prod.name.indexOf(busqueda) >= 0) || (prod.description.indexOf(busqueda) >= 0)){
+      result.push(prod);
+    }
+  }
+  return result;
+}
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -135,5 +146,13 @@ document.addEventListener("DOMContentLoaded", async function (e) {
     document.getElementById("sortByRelevance").addEventListener("click", function(){
       document.getElementsByClassName("container p-5")[0].innerHTML = "";
       showProduct(sortProduct(ORDER_BY_PROD_RELEVANCE, sortProductRank(producto, minCount, maxCount)));
+    });
+
+    // Buscador.
+    document.getElementById("search-input").addEventListener("keyup", (event) => {
+      document.getElementsByClassName("container p-5")[0].innerHTML = "";
+      var buscar = document.getElementById("search-input").value;
+      //console.log(buscar);
+      showProduct(search(producto, buscar));
     });
 });
