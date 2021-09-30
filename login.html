@@ -63,6 +63,7 @@
   </div>
 <!-- Autentificación con google -->
   <div class="g-signin2" data-onsuccess="onSignIn" onclick="redirigir();"></div>
+  <a href="login.html" onclick="signOut();">Sign out</a>
   <script>
     function onSignIn(googleUser) {
       // Useful data for your client-side scripts:
@@ -84,6 +85,15 @@
     function redirigir() {
       window.location="index.html";; 
     }
+
+    
+
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
   </script>
 <!---->
   <script src="js/login.js"></script>

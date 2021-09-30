@@ -3,31 +3,27 @@ const showProduct = (productos) => {
     // Se recorre el array de productos
     for (let prod of productos) {
 //        console.log(prod);
-      aux.innerHTML += `<h3>${prod.name}</h3>` ; // Nombre del producto
-      aux.innerHTML += `<hr>`;
-      const cont = document.createElement("dl"); // Contenedor de la información
-      aux.appendChild(cont);
-
-      cont.innerHTML += `<dt>Descripción</dt>`; // Descripción
-      cont.innerHTML += `<dd> <p> ${prod.description} </p> </dd>`;
-
-      cont.innerHTML += `<dt>Precio</dt>`; // Precio
-      cont.innerHTML += `<dd> <p> ${prod.cost} ${prod.currency} </p> </dd>`;
-
-      cont.innerHTML += `<dt>Recuento Vendido</dt>`; // Recuento Vendido
-      cont.innerHTML += `<dd> <p> ${prod.soldCount} </p> </dd>`;
-
-      cont.innerHTML += `<dt>Imágenes</dt>`; // Fotografías
-      cont.innerHTML += `
-      <dd>
-        <div class="col-lg-3 col-md-4 col-6">
-            <div class="d-block mb-4 h-100">
+      aux.innerHTML += `
+      <a href="product-info.html" class="list-group-item list-group-item-action">
+        <h3>${prod.name}</h3> <!-- Nombre del producto -->
+        <hr>
+        <dl>
+          <dt>Descripción</dt>
+          <dd> <p> ${prod.description} </p> </dd> <!-- Descripción -->
+          <dt>Precio</dt>
+          <dd> <p> ${prod.cost} ${prod.currency} </p> </dd> <!-- Precio -->
+          <dt>Recuento Vendido</dt>
+          <dd> <p> ${prod.soldCount} </p> </dd> <!-- Recuento Vendido -->
+          <dt>Imágenes</dt> <!-- Fotografías -->
+          <dd>
+            <div class="col-lg-3 col-md-4 col-6">
+              <div class="d-block mb-4 h-100">
                 <img class="img-fluid img-thumbnail" src="` + prod.imgSrc + `" alt="">
+              </div>
             </div>
-        </div>
-      </dd>`;
-
-      aux.innerHTML += `<hr>`;
+          </dd>
+        </dl>
+      </a>`
     }
     document.getElementsByClassName("container p-5")[0].appendChild(aux); // Agrego aux al div de clase "container p-5" y muestro en pantalla
   };
