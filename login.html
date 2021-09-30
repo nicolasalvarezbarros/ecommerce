@@ -63,7 +63,7 @@
     </div>
   </div>
 <!-- Autentificación con google -->
-  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <div class="g-signin2" data-onsuccess="onSignIn" onclick="redirigir();"></div>
   
   <script>
     function onSignIn(googleUser) {
@@ -80,7 +80,11 @@
       //var id_token = googleUser.getAuthResponse().id_token;
       //console.log("ID Token: " + id_token);
       localStorage.setItem("datos2", profile.getEmail());
-      window.location="index.html";
+      //window.location="index.html";
+    }
+
+    function redirigir() {
+      window.location="index.html";; 
     }
   </script>
 <!---->
