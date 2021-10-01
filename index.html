@@ -14,16 +14,16 @@
     <link href="css/styles.css" rel="stylesheet">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
-      function init() {
-        gapi.load('auth2', function() {
+      //function init() {
+      //  gapi.load('auth2', function() {
          /* Ready. Make a call to gapi.auth2.init or some other API */
          
-        });
-      }
+      //  });
+      //}
       
 
       function signOut() {
-        gapi.auth2.init();
+        //gapi.auth2.init();
         var auth2 = gapi.auth2.getAuthInstance();
         auth2.signOut().then(function () {
           console.log('User signed out.');
