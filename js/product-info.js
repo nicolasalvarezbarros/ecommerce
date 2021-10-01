@@ -14,8 +14,21 @@ const showProduct = (product, catego) => {
         <h3 class="text-center"><b>${product.name} </b></h3>
         <hr>
 
-        <div class="row text-center text-lg-left pt-2" id="productImages"></div>
-        <div id="prodImag"></div>
+        <!-- <div class="row text-center text-lg-left pt-2" id="productImages"></div> -->
+        <div id="carouselImages" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators" id="carouselIndicators"></ol>
+
+            <div class="carousel-inner" id="carouselInner"></div>
+
+            <a class="carousel-control-prev" href="#carouselImages" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselImages" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
         <hr>
 
         <h3 class="text-center">Costo: <b> ${product.cost} ${product.currency}</b></h3>
@@ -68,25 +81,36 @@ const showProduct = (product, catego) => {
 };
 
 function showImages(product){
-    for (let img of product.images) {
-        document.getElementById("productImages").innerHTML += `
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="` + img + `" alt="">
-                </div>
-            </div>
-        `;
-    }
+//    for (let img of product.images) {
+//        document.getElementById("productImages").innerHTML += `
+//            <div class="col-lg-3 col-md-4 col-6">
+//               <div class="d-block mb-4 h-100">
+//                    <img class="img-fluid img-thumbnail" src="` + img + `" alt="">
+//                </div>
+//            </div>
+//        `;
+//    }
 
-    
+    var i = 0;
     for (let img of product.images) {
-        document.getElementById("productImages").innerHTML += `
-            <div class="col-lg-3 col-md-4 col-6">
-                <div class="d-block mb-4 h-100">
-                    <img class="img-fluid img-thumbnail" src="` + img + `" alt="">
-                </div>
-            </div>
-        `;
+        if (img === product.images[0]){
+            document.getElementById("carouselIndicators").innerHTML += 
+            `<li data-target="#carouselImages" data-slide-to="0" class="active"></li>`;
+
+            document.getElementById("carouselInner").innerHTML += `
+            <div class="carousel-item active">
+                <img src="` + img + `" class="d-block w-100" alt="">
+            </div>`;
+        } else {
+            i++;
+            document.getElementById("carouselIndicators").innerHTML += 
+            `<li data-target="#carouselImages" data-slide-to="${i}"></li>`;
+
+            document.getElementById("carouselInner").innerHTML += `
+            <div class="carousel-item">
+                <img src="` + img + `" class="d-block w-100" alt="">
+            </div>`;
+        };
     }
 }
 
@@ -198,6 +222,29 @@ function showStarsNewComments(es1, es2, es3, es4, es5, fecha){
 
 // Mostrar Productos Relacionados
 const showRelatedProduct = (info_product, product) => {
+    document.getElementById("relatedProducts").innerHTML += `
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="..." class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="..." class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="..." class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>`
+
     for (let info_prod of info_product.relatedProducts) {
         document.getElementById("relatedProducts").innerHTML += `
         <a href="product-info.html" class="list-group-item list-group-item-action py-2 d-none d-sm-inline-block">
@@ -209,13 +256,14 @@ const showRelatedProduct = (info_product, product) => {
     }
 
     const cuadro = `<a class="list-group-item list-group-item-action py-2 d-none d-md-inline-block"></a>`;
-    if (info_product.relatedProducts.length = 0){
+    //console.log(info_product.relatedProducts.length);
+    if (info_product.relatedProducts.length === 0){
         document.getElementById("relatedProducts").innerHTML += cuadro + cuadro + cuadro + cuadro;
-    } else if (info_product.relatedProducts.length = 1) {
+    } else if (info_product.relatedProducts.length === 1) {
         document.getElementById("relatedProducts").innerHTML += cuadro + cuadro + cuadro;
-    } else if (info_product.relatedProducts.length = 2) {
+    } else if (info_product.relatedProducts.length === 2) {
         document.getElementById("relatedProducts").innerHTML += cuadro + cuadro;
-    } else if (info_product.relatedProducts.length = 3) {
+    } else if (info_product.relatedProducts.length === 3) {
         document.getElementById("relatedProducts").innerHTML += cuadro;
     }
   };

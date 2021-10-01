@@ -23,7 +23,14 @@
          
       //  });
       //}
-      
+      function signOut() {
+        gapi.load('auth2', function() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+      });
+      }
 
       function signOut() {
         //gapi.auth2.init();
