@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     </a>
     <div class="dropdown-menu">
       <a href="my-profile.html" class="dropdown-item">Su perfil</a>
+      <a href="cart.html" class="dropdown-item">Ver mi carrito</a>
       <div class="dropdown-divider"></div>
       <a id="logout" class="dropdown-item" href="login.html" onclick="signOut();">Cierre de sesión</a>
     </div>
