@@ -25,12 +25,12 @@
       //}
       function signOut() {
         gapi.load('auth2', function() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-        console.log('User signed out.');
-        localStorage.removeItem("datos2");
-      });
-      });
+          var auth2 = gapi.auth2.getAuthInstance();
+          auth2.signOut().then(function () {
+          console.log('User signed out.');
+          localStorage.removeItem("datos2");
+          });
+        });
       }
 
       //function signOut() {
@@ -123,7 +123,7 @@
         </div>
       </div>
 
-      <a href="" onclick="signOut();">Sign out</a>
+      <!--<a href="" onclick="signOut();">Sign out</a>-->
 
     </main>
     <footer class="text-muted">

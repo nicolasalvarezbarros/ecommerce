@@ -8,6 +8,11 @@ const showProduct = (product, catego) => {
         i++;
     }
 
+    var currency = "$";
+    if (product.currency === "USD") {
+        currency = "U$S"
+    } 
+
     const aux = document.createElement("div"); // Contenedor
     // Se recorre el array de productos
     aux.innerHTML += `
@@ -31,13 +36,21 @@ const showProduct = (product, catego) => {
         </div>
         <hr>
 
-        <h3 class="text-center">Costo: <b> ${product.cost} ${product.currency}</b></h3>
+        <h3 class="text-center">Costo: <b>${currency} ${product.cost}</b></h3>
 
         <div class="text-center">
             <div class="form-inline cant">
                 <h5>Cantidad: <h5>
-                <input type="text" id="cantidad" class="form-control" name="cantidad" placeholder="" required>
-                <button type="submit" class="btn btn-info" id="comprar">Aplicar</button>
+
+                <div class="input-group mb-0 w-100 form-group col-md-8"> <!-- Cantidad -->                     
+                    <div class="input-group-prepend">
+                        <button id="minus"><span class="h3">-</span></button>
+                    </div>
+                    <input min="1" name="quantity" value="1" type="number" class="form-control text-center" id="cantidad">
+                    <div class="input-group-append">
+                        <button id="plus"><span class="h3">+</span></button>
+                    </div>
+                </div>
             </div>
             
             <button type="submit" class="btn btn-primary btn-lg" id="comprar">Comprar ahora</button>
@@ -221,32 +234,10 @@ function showStarsNewComments(es1, es2, es3, es4, es5, fecha){
 }
 
 // Mostrar Productos Relacionados
-const showRelatedProduct = (info_product, product) => {
-    document.getElementById("relatedProducts").innerHTML += `
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>`
 
-    for (let info_prod of info_product.relatedProducts) {
-        document.getElementById("relatedProducts").innerHTML += `
+function  showRelatedProduct4 (info_product, product, idd){
+    for (let info_prod of info_product) {
+        document.getElementById(idd).innerHTML += `
         <a href="product-info.html" class="list-group-item list-group-item-action py-2 d-none d-sm-inline-block">
             <img class="img-fluid img-thumbnail" src="` + product[info_prod].imgSrc + `" alt="">
             <h3> ${product[info_prod].cost} ${product[info_prod].currency} </h3>
@@ -257,16 +248,54 @@ const showRelatedProduct = (info_product, product) => {
 
     const cuadro = `<a class="list-group-item list-group-item-action py-2 d-none d-md-inline-block"></a>`;
     //console.log(info_product.relatedProducts.length);
-    if (info_product.relatedProducts.length === 0){
-        document.getElementById("relatedProducts").innerHTML += cuadro + cuadro + cuadro + cuadro;
-    } else if (info_product.relatedProducts.length === 1) {
-        document.getElementById("relatedProducts").innerHTML += cuadro + cuadro + cuadro;
-    } else if (info_product.relatedProducts.length === 2) {
-        document.getElementById("relatedProducts").innerHTML += cuadro + cuadro;
-    } else if (info_product.relatedProducts.length === 3) {
-        document.getElementById("relatedProducts").innerHTML += cuadro;
+    if (info_product.length === 0){
+        document.getElementById(idd).innerHTML += cuadro + cuadro + cuadro + cuadro;
+    } else if (info_product.length === 1) {
+        document.getElementById(idd).innerHTML += cuadro + cuadro + cuadro;
+    } else if (info_product.length === 2) {
+        document.getElementById(idd).innerHTML += cuadro + cuadro;
+    } else if (info_product.length === 3) {
+        document.getElementById(idd).innerHTML += cuadro;
     }
-  };
+};
+
+function  showRelatedProduct (info_product, product){
+    if (info_product.length <= 4){
+        showRelatedProduct4 (info_product, product, "relatedProducts1");
+    } else {
+        showRelatedProduct4 ([info_product[0], info_product[1], info_product[2], info_product[3]], product, "relatedProducts1");
+    };
+
+    var entero = (info_product.length / 4 |0);
+    var resto = (info_product.length % 4);
+    var top = entero;
+    //console.log(entero, resto);
+
+    if (resto >= 0){
+        top++;
+    };
+
+    var ProdRel = [];
+    var aux = 0;
+    var cont = 5;
+
+    if (top >= 2){
+        for (var i = 2; i < top +1; i++) {
+            aux = i * 4;
+            while ((cont <= info_product.length) && (cont <= aux)){
+                ProdRel.push(info_product[cont-1]);
+                cont++;
+            }
+            //console.log(ProdRel);
+            document.getElementById("carruselProduct").innerHTML += `
+            <div class="carousel-item ">
+                <div class="container d-flex flex-column flex-sm-row justify-content-between" id="${cont}"></div>
+            </div>`;
+            showRelatedProduct4 (ProdRel, product, cont);
+            ProdRel = [];
+        }
+    }
+};
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
@@ -282,7 +311,8 @@ document.addEventListener("DOMContentLoaded", async function(e){
     showImages(producto);
     showComments(comentario);
     showStarsComments(comentario);
-    showRelatedProduct(producto, products);
+    showRelatedProduct(producto.relatedProducts, products);
+    //showRelatedProduct([0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 3], products);
 
     // Estrellas
     var estrella_1 = "";
@@ -388,8 +418,95 @@ document.addEventListener("DOMContentLoaded", async function(e){
         }
     });
 
+    // Boton - de cantidad.
+    document.getElementById("minus").addEventListener("click", function(){
+        var antt = document.getElementById("cantidad");
+        var ant = parseInt(antt.value);
+        
+        if (ant !== 1){
+            antt.value = ant - 1; 
+        }            
+    });
+
+    // Boton + de cantidad.
+    document.getElementById("plus").addEventListener("click", function(){
+        var sigg = document.getElementById("cantidad");
+        var sig = parseInt(sigg.value);
+        
+        sigg.value = sig + 1; 
+    });
+
     // Boton enviar a carrito.
-    document.getElementById("enviar_carrito").addEventListener("click", function(){
-        window.location="cart.html"
+    document.getElementById("enviar_carrito").addEventListener("click",async function(){
+        let aler = `
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Producto añadido al carrito con exito!</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>`;
+
+        if (localStorage.getItem("cartArticles") === null) {
+            var addProduct = {
+                "articles": [
+                    {
+                        "name": producto.name,
+                        "count": document.getElementById("cantidad").value,
+                        "unitCost": producto.cost,
+                        "currency": producto.currency,
+                        "src": producto.images[0]
+                    }
+                ]
+            };
+            localStorage.setItem("cartArticles", JSON.stringify(addProduct)); 
+            document.getElementById("comm").innerHTML = aler;
+        } else {
+            var datos = await JSON.parse(localStorage.getItem("cartArticles"));
+
+            if (datos.articles.length == 0) {
+                var addProduct = {
+                    "name": producto.name,
+                    "count": document.getElementById("cantidad").value,
+                    "unitCost": producto.cost,
+                    "currency": producto.currency,
+                    "src": producto.images[0]
+                };
+                datos.articles.push(addProduct);
+                localStorage.removeItem("cartArticles");
+                localStorage.setItem("cartArticles", JSON.stringify(datos));
+                document.getElementById("comm").innerHTML = aler;
+            } else {
+                
+                var i = 1;
+    
+                while ((i  < datos.articles.length) && (datos.articles[i-1].name !== producto.name)) {
+                    i++;
+                }
+               
+                if ((i >= (datos.articles.length)) && (datos.articles[datos.articles.length - 1].name !== producto.name)) {
+                    var addProduct = {
+                        "name": producto.name,
+                        "count": document.getElementById("cantidad").value,
+                        "unitCost": producto.cost,
+                        "currency": producto.currency,
+                        "src": producto.images[0]
+                    };
+                
+                    datos.articles.push(addProduct);
+                    localStorage.removeItem("cartArticles");
+                    localStorage.setItem("cartArticles", JSON.stringify(datos));
+                    document.getElementById("comm").innerHTML = aler;
+                } else {
+                    document.getElementById("comm").innerHTML = `
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <strong>El producto ya se encuantra añadido al carrito!</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>`;
+                }
+            }
+        }    
+        //window.location="cart.html"
     });
 });
